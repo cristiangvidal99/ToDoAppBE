@@ -19,7 +19,7 @@ namespace Api.Repository
             _apiKey = configuration["apiKey"]!;
         }
 
-        public async Task<Tasks> CreateTask(Tasks task)
+        public async Task<CreateTask> CreateTask(CreateTask task)
         {
             var url = $"{_baseUrl}/rest/v1/TASK";
 
@@ -44,7 +44,7 @@ namespace Api.Repository
             }
 
             var responseBody = await response.Content.ReadAsStringAsync();
-            var result = JsonSerializer.Deserialize<List<Tasks>>(responseBody);
+            var result = JsonSerializer.Deserialize<List<CreateTask>>(responseBody);
 
             return result!.First();
         }

@@ -14,7 +14,7 @@ namespace Api.Services
         {
             throw new NotImplementedException();
         }
-        public Task<Tasks> CreateTask(Tasks task)
+        public Task<CreateTask> CreateTask(CreateTask task)
         {
             return _taskRepository.CreateTask(task);
         }

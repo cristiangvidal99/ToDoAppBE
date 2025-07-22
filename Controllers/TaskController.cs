@@ -25,11 +25,21 @@ namespace Api.Controllers
         }
 
         [HttpPost("CreateTask")]
-        public Task<Tasks> CreateTask(Tasks task)
+        public async Task<IActionResult> CreateTask([FromBody] CreateTask task)
         {
-            _logger.LogInformation($"-HttpPost: {nameof(CreateTask)}-");
-            return _taskService.CreateTask(task);
+            try
+            {
+                _logger.LogInformation($"-HttpPost: {nameof(CreateTask)}-");
+                var result = await _taskService.CreateTask(task);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al crear la tarea");
+                return StatusCode(500, new { error = ex.Message });
+            }
         }
+
         [HttpPost("DeleteTask")]
         public Task<string> DeleteTask(int id)
         {
