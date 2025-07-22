@@ -30,5 +30,17 @@ namespace Api.Controllers
             _logger.LogInformation($"-HttpPost: {nameof(CreateTask)}-");
             return _taskService.CreateTask(task);
         }
+        [HttpPost("DeleteTask")]
+        public Task<string> DeleteTask(int id)
+        {
+            _logger.LogInformation($"-HttpPost: {nameof(DeleteTask)}-");
+            return _taskService.DeleteTask(id);
+        }
+        [HttpPut("UpdateTask")]
+        public Task<Tasks> UpdateTask(Tasks task)
+        {
+            _logger.LogInformation($"-HttpPost: {nameof(UpdateTask)}-");
+            return _taskService.UpdateTask(task);
+        }
     }
 }

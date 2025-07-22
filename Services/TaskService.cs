@@ -18,5 +18,13 @@ namespace Api.Services
         {
             return _taskRepository.CreateTask(task);
         }
+        public Task<string> DeleteTask(int id)
+        {
+            return _taskRepository.DeleteTask(id);
+        }
+        public Task<Tasks> UpdateTask(Tasks task)
+        {
+            return _taskRepository.UpdateTask(task);
+        }
     }
 }
