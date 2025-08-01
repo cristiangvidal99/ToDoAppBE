@@ -47,7 +47,7 @@ namespace Api.Controllers
             }
         }
 
-        [HttpPost("DeleteTask/{id}")]
+        [HttpDelete("DeleteTask/{id}")]
         public async Task<string> DeleteTask(int id)
         {
             _logger.LogInformation($"-HttpPost: {nameof(DeleteTask)}-");

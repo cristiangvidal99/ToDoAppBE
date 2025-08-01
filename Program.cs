@@ -17,7 +17,6 @@ namespace Api
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
             builder.Services.AddHealthChecks();
-            builder.Services.AddScoped<ITaskRepository, TaskRepository>();
             builder.Services.AddScoped<ITaskService, TaskService>();
             builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
