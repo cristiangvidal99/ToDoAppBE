@@ -24,7 +24,7 @@ namespace Api
             {
                 options.AddPolicy("AllowLocalhostFrontend", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173") // URL del frontend
+                    policy.WithOrigins("http://localhost:5173", "https://spontaneous-pudding-386f9f.netlify.app/") // URL del frontend
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                 });
