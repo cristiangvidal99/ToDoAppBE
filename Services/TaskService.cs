@@ -1,5 +1,6 @@
 ﻿using Api.Interfaces;
 using Api.Models;
+using System.Threading.Tasks;
 
 namespace Api.Services
 {
@@ -10,9 +11,13 @@ namespace Api.Services
         {
             _taskRepository = taskRepository;
         }
+        public Task<List<Tasks>> GetAllTasks()
+        {
+            return _taskRepository.GetAllTasks();
+        }
         public Task<Tasks> GetTaskById(int id)
         {
-            throw new NotImplementedException();
+            return _taskRepository.GetTaskById(id);
         }
         public Task<CreateTask> CreateTask(CreateTask task)
         {

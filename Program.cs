@@ -21,6 +21,26 @@ namespace Api
             builder.Services.AddScoped<ITaskService, TaskService>();
             builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhostFrontend", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173") // URL del frontend
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
+
+
+            builder.Services.AddHttpClient<ITaskRepository, TaskRepository>((sp, client) =>
+            {
+                var configuration = sp.GetRequiredService<IConfiguration>();
+                client.BaseAddress = new Uri(configuration["baseUrl"]!);
+                client.DefaultRequestHeaders.Add("apikey", configuration["apiKey"]!);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", configuration["apiKey"]);
+            });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,8 +50,8 @@ namespace Api
             }
             app.UseHttpsRedirection();
             app.MapHealthChecks("/healthcheck");
+            app.UseCors("AllowLocalhostFrontend");
             app.UseAuthorization();
-
 
             app.MapControllers();
 

@@ -17,6 +17,13 @@ namespace Api.Controllers
             _taskService = taskService;
         }
 
+        [HttpGet("GetAllTasks")]
+        public Task<List<Tasks>> GetAllTasks()
+        {
+            _logger.LogInformation($"-HttpGet: {nameof(GetAllTasks)}-");
+            return _taskService.GetAllTasks();
+        }
+
         [HttpGet("GetTaskById")]
         public Task<Tasks> GetTaskById(int id)
         {
@@ -40,11 +47,12 @@ namespace Api.Controllers
             }
         }
 
-        [HttpPost("DeleteTask")]
-        public Task<string> DeleteTask(int id)
+        [HttpPost("DeleteTask/{id}")]
+        public async Task<string> DeleteTask(int id)
         {
             _logger.LogInformation($"-HttpPost: {nameof(DeleteTask)}-");
-            return _taskService.DeleteTask(id);
+            var result = await _taskService.DeleteTask(id);
+            return result;
         }
         [HttpPut("UpdateTask")]
         public Task<Tasks> UpdateTask(Tasks task)

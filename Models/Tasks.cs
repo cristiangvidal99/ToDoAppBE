@@ -2,7 +2,7 @@
 {
     public class Tasks
     {
-        public string ?id { get; set; }
+        public int id { get; set; }
         public required string title { get; set; }
         public required string description { get; set; }
         public required string priority { get; set; }
